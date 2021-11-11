@@ -33,37 +33,27 @@ public class Table extends Thread {
         this.quantity = quantity;
     }
 
-    public synchronized void placeMeal(Chef chef) throws InterruptedException {
+    public synchronized void placeMeal() throws InterruptedException {
 
-        while (this.quantity >= this.capacity) {
+        if (this.quantity < this.capacity) {
+            //Aqui coloca el plato
+            ++this.quantity;
+            notifyAll();
+        } else {
             wait();
         }
-
-        //La velocidad a la que cocina la determinamos aqui
-        sleep(chef.pace);
-
-        //Aqui coloca el plato
-        ++this.quantity;
-
-        System.out.println("Chef " + chef.type + ": " + this.quantity);
-
-        notify();
 
     }
 
-    public synchronized void takeMeal(Client client) throws InterruptedException {
-        while (this.quantity == 0) {
+    public synchronized void takeMeal() throws InterruptedException {
+
+        if (this.quantity > 0) {
+            //Aqui coge el plato
+            --this.quantity;
+            notifyAll();
+        } else {
             wait();
         }
-
-        //Aqui coge el plato
-        --this.quantity;
-
-        //La velocidad a la que come la determinamos aqui
-        sleep(client.pace);
-
-        System.out.println("Client " + client.type + ": " + this.quantity);
-        notify();
     }
 
     @Override

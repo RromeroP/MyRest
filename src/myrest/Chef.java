@@ -32,17 +32,26 @@ public class Chef extends Thread {
         return pace;
     }
 
+    public void cook() throws InterruptedException {
+        //Cocinamos
+        sleep(this.pace);
+
+        //Colocamos el plato
+        table.placeMeal();
+        System.out.println("Chef " + this.type + ": " + table.getQuantity());
+
+        //Descansamos
+        sleep(this.pace);
+    }
+
     @Override
     public void run() {
 
         while (true) {
             try {
-                
-                //Añadimos la comida a la mesa
-                table.placeMeal(this);
-                
+                cook();
             } catch (InterruptedException ex) {
-                Logger.getLogger(Chef.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
