@@ -29,7 +29,7 @@ public class MyRest {
         Table table1 = new Table(1, 0, 10, WIDTH / 2 - 25, 25, 50, HEIGHT - 90);
         table1.start();
 
-        Chef chef1 = new Chef(1, 20, table1, 100, ((HEIGHT - 90) / 5) * 1 - 30, 45, 45);
+        Chef chef1 = new Chef(1, 5, table1, 100, ((HEIGHT - 90) / 5) * 1 - 30, 45, 45);
         Chef chef2 = new Chef(2, 600, table1, 100, ((HEIGHT - 90) / 5) * 2 - 30, 45, 45);
         Chef chef3 = new Chef(3, 500, table1, 100, ((HEIGHT - 90) / 5) * 3 - 30, 45, 45);
         Chef chef4 = new Chef(4, 500, table1, 100, ((HEIGHT - 90) / 5) * 4 - 30, 45, 45);
@@ -55,9 +55,10 @@ public class MyRest {
         frame = new JFrame(TITLE);
         frame.setPreferredSize(SIZE);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().setBackground(Color.GRAY);
 
         Viewer viewer = new Viewer(SIZE, table1, arrayChefs, arrayClients);
-        viewer.setRate(5);
+        viewer.setRate(200);
 
         frame.add(viewer.getCanvas());
 
