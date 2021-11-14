@@ -54,7 +54,7 @@ public class Viewer extends Canvas implements Runnable {
 
     @Override
     public void paint(Graphics g) {
-        
+
         //Dibujamos la cocina
         g.setColor(Color.BLACK);
         g.fillRect(25, 25, table.getSize1(), table.getSize2());
@@ -90,14 +90,13 @@ public class Viewer extends Canvas implements Runnable {
             g.setColor(Color.red);
             g.fillOval(arrayChefs[i].getX1(), arrayChefs[i].getY1(), arrayChefs[i].getSize1(), arrayChefs[i].size2);
         }
+
     }
 
     @Override
     public void run() {
         //Aqui se crea el bucle poniendo repaint como ejecutar paint()
         while (stoped == false) {
-            this.setBackground(Color.GRAY);
-
             this.repaint();
 
             try {

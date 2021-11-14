@@ -75,31 +75,26 @@ public class Table extends Thread {
 
     public synchronized void placeMeal() throws InterruptedException {
 
-        if (this.quantity < this.capacity) {
-            //Aqui coloca el plato
-            System.out.println("Antes de quantity");
-            ++this.quantity;
-            System.out.println("Antes de notify all");
-            notifyAll();
-            System.out.println("Despues de notify all");
-        } else {
-            System.out.println("Antes de wait");
+        while (this.quantity >= this.capacity) {
             wait();
-            System.out.println("Despues de wait");
         }
+        
+        //Ponemos el plato
+        ++this.quantity;
+        sleep(50);
+        notify();
 
     }
 
     public synchronized void takeMeal() throws InterruptedException {
 
-        if (this.quantity > 0) {
-            //Aqui coge el plato
-            notifyAll();
-            --this.quantity;
-        } else {
+        while (this.quantity == 0) {
             wait();
         }
-        
+        //Aqui coge el plato
+        --this.quantity;
+        notify();
+
     }
 
     @Override

@@ -84,26 +84,22 @@ public class Client extends Thread {
 
     public void eat() throws InterruptedException {
 
-        //Ligero delay al coger el plato, para que se vea mas claro
-        sleep(200);
-        
         //Cogemos el plato
         table.takeMeal();
-        
+
         //Aqui podriamos empezara la animacion
         while (this.x1 < 660) {
-            ++this.x1;        
+            ++this.x1;
             //Velocidad de movimiento
             sleep(this.pace);
         }
-        
+
         //Comemos
         sleep(500);
 
-
         //Descansamos
         sleep(500);
-        
+
         while (this.x1 > 430) {
             --this.x1;
             //Velocidad de movimiento
