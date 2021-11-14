@@ -21,8 +21,16 @@ public class Client extends Thread {
     //Prueba para dibujar
     int x1;
     int y1;
-    int x2;
-    int y2;
+    int size1;
+    int size2;
+
+    public Table getTable() {
+        return table;
+    }
+
+    public void setTable(Table table) {
+        this.table = table;
+    }
 
     public int getX1() {
         return x1;
@@ -40,30 +48,30 @@ public class Client extends Thread {
         this.y1 = y1;
     }
 
-    public int getX2() {
-        return x2;
+    public int getSize1() {
+        return size1;
     }
 
-    public void setX2(int x2) {
-        this.x2 = x2;
+    public void setSize1(int size1) {
+        this.size1 = size1;
     }
 
-    public int getY2() {
-        return y2;
+    public int getSize2() {
+        return size2;
     }
 
-    public void setY2(int y2) {
-        this.y2 = y2;
+    public void setSize2(int size2) {
+        this.size2 = size2;
     }
 
-    public Client(int type, int pace, Table table, int x1, int y1, int x2, int y2) {
+    public Client(int type, int pace, Table table, int x1, int y1, int size1, int size2) {
         this.type = type;
         this.pace = pace;
         this.table = table;
         this.x1 = x1;
         this.y1 = y1;
-        this.x2 = x2;
-        this.y2 = y2;
+        this.size1 = size1;
+        this.size2 = size1;
     }
 
     public int getType() {
@@ -76,18 +84,31 @@ public class Client extends Thread {
 
     public void eat() throws InterruptedException {
 
+        //Ligero delay al coger el plato, para que se vea mas claro
+        sleep(200);
+        
         //Cogemos el plato
         table.takeMeal();
-        System.out.println("Client " + this.type + ": " + table.getQuantity());
-
-        //Comemos
-        sleep(this.pace);
         
-        ++this.x1;
-        ++this.y1;
+        //Aqui podriamos empezara la animacion
+        while (this.x1 < 660) {
+            ++this.x1;        
+            //Velocidad de movimiento
+            sleep(this.pace);
+        }
+        
+        //Comemos
+        sleep(500);
+
 
         //Descansamos
-        sleep(this.pace);
+        sleep(500);
+        
+        while (this.x1 > 430) {
+            --this.x1;
+            //Velocidad de movimiento
+            sleep(this.pace);
+        }
     }
 
     @Override

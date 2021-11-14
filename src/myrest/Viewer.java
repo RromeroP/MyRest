@@ -54,13 +54,42 @@ public class Viewer extends Canvas implements Runnable {
 
     @Override
     public void paint(Graphics g) {
-        //Aqui poner lo que iria dentro de un bucle para dibujarse
+        
+        //Dibujamos la cocina
+        g.setColor(Color.BLACK);
+        g.fillRect(25, 25, table.getSize1(), table.getSize2());
 
-        for (int i = 0; i < this.arrayClients.length; i++) {
-            g.setColor(Color.yellow);
-            g.fillRect(this.arrayClients[i].x1, this.arrayClients[i].y1, this.arrayClients[i].x2, this.arrayClients[i].y2);
+        //Dibujamos la cocina
+        g.setColor(Color.BLACK);
+        g.fillRect(715, 25, table.getSize1(), table.getSize2());
+
+        //Dibujamos la mesa
+        g.setColor(Color.DARK_GRAY);
+        g.fillRect(table.getX1(), table.getY1(), table.getSize1(), table.getSize2());
+
+        //Dibujamos los platos
+        for (int i = 0; i < table.getQuantity(); i++) {
+            g.setColor(Color.WHITE);
+
+            if (i % 2 == 0) {
+                g.fillOval(table.getX1() + 25, table.getY1() + 5 + (31 * i), 20, 20);
+            } else {
+                g.fillOval(table.getX1() + 5, table.getY1() + 5 + (31 * i), 20, 20);
+            }
+
         }
 
+        //Dibujamos los clientes
+        for (int i = 0; i < this.arrayClients.length; i++) {
+            g.setColor(Color.yellow);
+            g.fillOval(arrayClients[i].getX1(), arrayClients[i].getY1(), arrayClients[i].getSize1(), arrayClients[i].size2);
+        }
+
+        //Dibujamos los chefs
+        for (int i = 0; i < this.arrayChefs.length; i++) {
+            g.setColor(Color.red);
+            g.fillOval(arrayChefs[i].getX1(), arrayChefs[i].getY1(), arrayChefs[i].getSize1(), arrayChefs[i].size2);
+        }
     }
 
     @Override
